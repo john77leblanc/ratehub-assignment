@@ -3,7 +3,7 @@ import GlobalStyle from '../theme/globalStyle';
 import { ThemeProvider } from 'styled-components';
 import { theme } from '../theme/theme';
 
-import TodoList from './TodoList'
+import TodoList from './TodoList/index.js'
 
 
 const CONFIG = {

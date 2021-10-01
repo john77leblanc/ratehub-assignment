@@ -13,5 +13,5 @@ function TodoListItem({ className, name, onComplete, onChange }) {
 }
 
 export default styled(observer(TodoListItem))`
-    color: red;
+    color: ${props => props.theme.color.primary};
 `
