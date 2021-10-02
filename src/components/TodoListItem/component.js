@@ -7,6 +7,8 @@ import { StyledComponent } from './styledComponent';
 const TodoListItem = ({
   className,
   name,
+  inProgress,
+  toggleInProgress,
   onComplete,
   onDelete,
   onChange,
@@ -15,7 +17,8 @@ const TodoListItem = ({
     <StyledComponent className={className}>
       <input onChange={onChange} value={name} />
       <div className="controls">
-        <button onClick={onComplete}>Complete Task</button>
+        <button onClick={toggleInProgress}>In Progress {inProgress && (<span>True</span>)}</button>
+        <button onClick={onComplete} disabled={!inProgress}>Complete Task</button>
         <button onClick={onDelete}>Delete Task</button>
       </div>
     </StyledComponent>

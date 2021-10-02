@@ -22,7 +22,9 @@ const TodoList = ({ className }) => {
             <TodoListItem
               key={item.id}
               name={item.name}
+              inProgress={item.inProgress}
               isComplete={item.isComplete}
+              toggleInProgress={() => store.toggleInProgress(item.id)}
               onComplete={() => store.setCompleted(item.id)}
               onDelete={() => store.setDelete(item.id)}
               onChange={(e) => store.setItemName(item.id, e.target.value)}

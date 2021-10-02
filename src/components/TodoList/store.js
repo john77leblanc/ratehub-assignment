@@ -24,10 +24,14 @@ const createTodoStore = () => {
       self.items.push({
         id: uuid(),
         name: `Item ${self.items.length}`,
+        inProgress: false,
       });
     },
     setItemName(id, name) {
       self.findItem(id).name = name;
+    },
+    toggleInProgress(id) {
+      self.findItem(id).inProgress = !self.findItem(id).inProgress;
     },
     setCompleted(id) {
       self.findItem(id).isComplete = true;
