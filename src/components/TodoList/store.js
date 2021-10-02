@@ -17,6 +17,9 @@ const createTodoStore = () => {
       return self.items.filter(i => i.isComplete);
     },
 
+    findItem(id) {
+      return self.items.find(i => i.id === id);
+    },
     addItem() {
       self.items.push({
         id: uuid(),
@@ -24,13 +27,14 @@ const createTodoStore = () => {
       });
     },
     setItemName(id, name) {
-      const item = self.items.find(i => i.id === id);
-      item.name = name;
+      self.findItem(id).name = name;
     },
     setCompleted(id) {
-      const item = self.items.find(i => i.id === id);
-      item.isComplete = true;
+      self.findItem(id).isComplete = true;
     },
+    setDelete(id) {
+      self.items.remove(self.findItem(id));
+    }
   })
 
   return self;

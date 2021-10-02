@@ -24,6 +24,7 @@ const TodoList = ({ className }) => {
               name={item.name}
               isComplete={item.isComplete}
               onComplete={() => store.setCompleted(item.id)}
+              onDelete={() => store.setDelete(item.id)}
               onChange={(e) => store.setItemName(item.id, e.target.value)}
             />
           ))}
