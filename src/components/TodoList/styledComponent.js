@@ -26,12 +26,6 @@ export const StyledComponent = styled.div`
     list-style: none;
     margin-top: 0;
     padding-inline-start: 0;
-
-    :focus-within {
-      li {
-        background-color: ${props => props.theme.grays.light};
-      }
-    }
   }
 
   button.addTask {

@@ -15,6 +15,9 @@ export const theme = {
     medium: '#cccccc',
     dark: '#333333',
   },
+  shadow: {
+    light: 'rgba(20,20,20,0.4)'
+  },
   font: {
     primary: '"Open Sans", Arial, Helvetica, sans-serif',
     secondary: '"Georgia", serif',
