@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 
-export const StyledList = styled.div`
+export const StyledComponent = styled.div`
   background-color: ${props => props.theme.background.main};
   padding: 1rem;
 

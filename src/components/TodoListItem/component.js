@@ -1,18 +1,18 @@
 import React from 'react'
 import { observer } from 'mobx-react'
 
-import { StyledListItem } from './styledListItem';
+import { StyledComponent } from './styledComponent';
 
 
-function TodoListItem({ className, name, onComplete, onChange }) {
+const TodoListItem = ({ className, name, onComplete, onChange }) => {
   return (
-    <StyledListItem className={className}>
+    <StyledComponent className={className}>
       <input onChange={onChange} value={name} />
       <div className="controls">
         <button onClick={onComplete}>Complete Task</button>
         <button onClick={onComplete}>Delete Task</button>
       </div>
-    </StyledListItem>
+    </StyledComponent>
   )
 }
 

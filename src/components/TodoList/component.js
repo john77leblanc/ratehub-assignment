@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 import { observer } from 'mobx-react';
 
 import createTodoStore from './store';
-import TodoListItem from './listItem';
+import TodoListItem from '../TodoListItem/index';
 
-import { StyledList } from './styledList';
+import { StyledComponent } from './styledComponent';
 
 
 const TodoList = ({ className }) => {
   const [store] = useState(createTodoStore);
 
   return (
-    <StyledList className={className}>
+    <StyledComponent className={className}>
       <header>
         <h1 className="title">TODO List Example</h1>
       </header>
@@ -45,7 +45,7 @@ const TodoList = ({ className }) => {
           ))}
         </ul>
       </footer>
-    </StyledList>
+    </StyledComponent>
   )
 }
 
