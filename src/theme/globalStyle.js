@@ -14,7 +14,19 @@ const GlobalStyle = createGlobalStyle`
   *:after {
     font-size: inherit;
     box-sizing: border-box;
-    transition: background-color 0.25s;
+    transition: background-color 0.25s, bottom 0.25s;
+  }
+
+  button { cursor: pointer; }
+
+  input, button {
+    border: none;
+    background-color: transparent;
+
+    :focus {
+      border: none;
+      outline: none;
+    }
   }
 
   @keyframes fadein {

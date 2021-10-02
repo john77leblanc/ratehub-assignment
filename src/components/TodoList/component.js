@@ -16,7 +16,8 @@ const TodoList = ({ className }) => {
         <h1 className="title">TODO List Example</h1>
       </header>
       <section>
-        <ul>
+        <h2>Tasks</h2>
+        <ul className="incompleteTasks">
           {store.activeItems.map(item => (
             <TodoListItem
               key={item.id}
@@ -27,13 +28,16 @@ const TodoList = ({ className }) => {
             />
           ))}
         </ul>
-        <button onClick={store.addItem}>
+        <button
+          className="addTask"
+          onClick={store.addItem}
+        >
           Add New Item
         </button>
       </section>
       <footer>
         <h2 className="completedTitle">Completed Items</h2>
-        <ul>
+        <ul className="completeTasks">
           {store.completedItems.map(item => (
             <li key={item.id}>
               {item.name}

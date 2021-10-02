@@ -1,19 +1,22 @@
 export const theme = {
   color: {
-    primary: 'rgb(0, 181, 214)',
-    secondary: '#54CCDE',
-    light: '#ececec',
-    medium: '#666666',
-    dark: '#333333',
+    main: '#001524',
+    accent: '#54CCDE',
+    light: '#ffffff',
+    dark: '#000000',
   },
   background: {
-    light: '#DDF5F8',
-    dark: '#001524',
+    main: '#ffffff',
+    accent: '#DDF5F8',
+    warning: '#ff0000',
+  },
+  grays: {
+    light: '#eeeeee',
+    medium: '#cccccc',
+    dark: '#333333',
   },
   font: {
     primary: '"Open Sans", Arial, Helvetica, sans-serif',
     secondary: '"Georgia", serif',
-  },
-  contrast: 0.4,
-  overlay: 'rgba(30,30,30,0.7)',
+  }
 };

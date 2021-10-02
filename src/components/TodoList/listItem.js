@@ -8,8 +8,10 @@ function TodoListItem({ className, name, onComplete, onChange }) {
   return (
     <StyledListItem className={className}>
       <input onChange={onChange} value={name} />
-      <button onClick={onComplete}>Complete Task</button>
-      <button onClick={onComplete}>Delete Task</button>
+      <div className="controls">
+        <button onClick={onComplete}>Complete Task</button>
+        <button onClick={onComplete}>Delete Task</button>
+      </div>
     </StyledListItem>
   )
 }
