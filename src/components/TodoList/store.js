@@ -18,6 +18,9 @@ const createTodoStore = () => {
     get completedItems() {
       return self.items.filter(i => i.isComplete);
     },
+    get allTaskTags() {
+      return self.allTags;
+    },
 
     findItem(id) {
       return self.items.find(i => i.id === id);
@@ -35,12 +38,18 @@ const createTodoStore = () => {
     },
     updateTagData(taskId) {
       let task = self.findItem(taskId);
+      task.tags.sort((a,b) => a.name.localeCompare(b.name));
       task.tags.map((tag, index) => tag.id = index);
+      // Reassign so the observer can recognize change
       task.tags = Array.from(task.tags);
     },
     addTag(taskId, name) {
       let task = self.findItem(taskId);
-      task.tags.push({id: null, name});
+      if (!task.tags.find(tag => tag.name === name)) {
+        task.tags.push({id: null, name});
+        // Remove duplicates
+        self.allTags = [...new Set(self.allTags.concat(task.tags.map(tag => tag.name)))].sort();
+      }
       self.updateTagData(taskId);
     },
     removeTag(taskId, id) {

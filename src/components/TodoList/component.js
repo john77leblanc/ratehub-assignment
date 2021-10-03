@@ -3,6 +3,7 @@ import { observer } from 'mobx-react';
 
 import createTodoStore from './store';
 import TodoListItem from '../TodoListItem/index';
+import Filter from '../Filter/index';
 
 import { StyledComponent } from './styledComponent';
 
@@ -42,6 +43,7 @@ const TodoList = ({ className }) => {
         </button>
       </section>
       <footer>
+        <p>Filter by: <Filter options={store.allTaskTags} /></p>
         <h2 className="completedTitle">Completed Items</h2>
         <ul className="completeTasks">
           {store.completedItems.map(item => (

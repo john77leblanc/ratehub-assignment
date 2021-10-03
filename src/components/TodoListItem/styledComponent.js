@@ -56,7 +56,7 @@ export const StyledComponent = styled.li`
   }
 
   :hover {
-    bottom: 0.25rem;
+    bottom: 0.1rem;
     border-radius: 5px;
     background-color: ${props => props.theme.background.main} !important;
     box-shadow: 0 4px 8px ${props => props.theme.shadow.light};
