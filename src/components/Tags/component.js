@@ -1,16 +1,20 @@
 import React, { useRef } from 'react';
+import { observer } from 'mobx-react';
 import { StyledComponent } from './styledComponent';
+import { useStore } from '../TodoList/store';
 
-const Tags = ({ tags, onAddTag, onRemoveTag }) => {
+
+const Tags = ({ taskId, tags }) => {
+  const store = useStore();
   const tagInput = useRef();
 
   const handleAddTag = () => {
-    if (tagInput.current.value.length) onAddTag(tagInput.current.value);
+    if (tagInput.current.value.length) store.addTag(taskId, tagInput.current.value);
     tagInput.current.value = '';
   };
 
   const handleRemoveTag = (e) => {
-    onRemoveTag(e.target.id);
+    store.removeTag(taskId, e.target.id);
   };
 
   return (
@@ -29,6 +33,7 @@ const Tags = ({ tags, onAddTag, onRemoveTag }) => {
               <i>{tag.name}</i>
               <button
                 id={tag.id}
+                name={tag.name}
                 onClick={handleRemoveTag}
                 aria-label="Remove tag"
               >
@@ -42,4 +47,4 @@ const Tags = ({ tags, onAddTag, onRemoveTag }) => {
   )
 };
 
-export default Tags;
+export default observer(Tags);

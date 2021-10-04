@@ -4,30 +4,28 @@ import { observer } from 'mobx-react'
 import { StyledComponent } from './styledComponent';
 
 import Tags from '../Tags/index';
+import { useStore } from '../TodoList/store';
 
 
 const TodoListItem = ({
+  taskId,
   className,
   name,
   tags,
   inProgress,
-  toggleInProgress,
-  onComplete,
-  onDelete,
-  onChange,
-  onAddTag,
-  onRemoveTag
 }) => {
+  const store = useStore();
+
   return (
     <StyledComponent className={className}>
-      <input onChange={onChange} value={name} />
+      <input onChange={(e) => store.setItemName(taskId, e.target.value)} value={name} />
       <div className="tags w25">
-        <Tags tags={tags} onAddTag={onAddTag} onRemoveTag={onRemoveTag} />
+        <Tags taskId={taskId} tags={tags} />
       </div>
       <div className="controls w25">
-        <button onClick={toggleInProgress}>In Progress {inProgress && (<span>True</span>)}</button>
-        <button onClick={onComplete} disabled={!inProgress}>Complete Task</button>
-        <button onClick={onDelete}>Delete Task</button>
+        <button onClick={() => store.toggleInProgress(taskId)}>In Progress {inProgress && (<span>True</span>)}</button>
+        <button onClick={() => store.setCompleted(taskId)} disabled={!inProgress}>Complete Task</button>
+        <button onClick={() => store.setDelete(taskId)}>Delete Task</button>
       </div>
     </StyledComponent>
   )

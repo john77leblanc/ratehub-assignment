@@ -1,4 +1,5 @@
 import { observable } from 'mobx';
+import { createContext, useContext } from 'react';
 import { v4 as uuid } from 'uuid';
 
 
@@ -36,26 +37,24 @@ const createTodoStore = () => {
     setItemName(id, name) {
       self.findItem(id).name = name;
     },
-    updateTagData(taskId) {
-      let task = self.findItem(taskId);
+    sortTags(task) {
       task.tags.sort((a,b) => a.name.localeCompare(b.name));
-      task.tags.map((tag, index) => tag.id = index);
-      // Reassign so the observer can recognize change
-      task.tags = Array.from(task.tags);
+      
+      return task.tags;
     },
     addTag(taskId, name) {
       let task = self.findItem(taskId);
       if (!task.tags.find(tag => tag.name === name)) {
-        task.tags.push({id: null, name});
+        task.tags.push({id: uuid(), name});
         // Remove duplicates
         self.allTags = [...new Set(self.allTags.concat(task.tags.map(tag => tag.name)))].sort();
       }
-      self.updateTagData(taskId);
+      self.sortTags(task);
     },
     removeTag(taskId, id) {
       let task = self.findItem(taskId);
-      task.tags.splice(id, 1);
-      self.updateTagData(taskId);
+      task.tags = task.tags.filter((tag) => tag.id !== id);
+      self.sortTags(task);
     },
     toggleInProgress(id) {
       self.findItem(id).inProgress = !self.findItem(id).inProgress;
@@ -71,4 +70,16 @@ const createTodoStore = () => {
   return self;
 }
 
-export default createTodoStore;
+const StoreContext = createContext(createTodoStore());
+
+const StoreProvider = ({ store, children }) => {
+  return (
+    <StoreContext.Provider value={store}>{children}</StoreContext.Provider>
+  );
+};
+
+const useStore = () => {
+  return useContext(StoreContext);
+};
+
+export { createTodoStore, StoreProvider, useStore };
