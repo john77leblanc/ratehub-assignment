@@ -2,6 +2,10 @@ import { observable } from 'mobx';
 import { createContext, useContext } from 'react';
 import { v4 as uuid } from 'uuid';
 
+const filterFind = (task, filter) => {
+  if (filter === null) return true;
+  return task.tags.find(tag => tag.name === filter);
+};
 
 const createTodoStore = () => {
   const self = observable({
@@ -12,12 +16,15 @@ const createTodoStore = () => {
       tags: []
     }],
     allTags: [],
+    filter: null,
 
     get activeItems() {
-      return self.items.filter(i => !i.isComplete);
+      return self.items.filter(task => !task.isComplete)
+        .filter(task => filterFind(task, self.filter));
     },
     get completedItems() {
-      return self.items.filter(i => i.isComplete);
+      return self.items.filter(i => i.isComplete)
+        .filter(task => filterFind(task, self.filter));
     },
     get allTaskTags() {
       return self.allTags;
@@ -64,6 +71,9 @@ const createTodoStore = () => {
     },
     setDelete(id) {
       self.items.remove(self.findItem(id));
+    },
+    setFilter(name) {
+      self.filter = name;
     }
   })
 

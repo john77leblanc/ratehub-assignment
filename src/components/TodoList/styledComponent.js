@@ -38,4 +38,17 @@ export const StyledComponent = styled.div`
       background-color: ${props => props.theme.color.main};
     }
   }
+
+  .completeTags {
+    display: flex;
+    justify-content: flex-start;
+    gap: 0.25rem;
+
+    span {
+      background-color: ${props => props.theme.grays.medium};
+      border-radius: 3px;
+      color: ${props => props.theme.color.light};
+      padding: 0 0.25rem;
+    }
+  }
 `;

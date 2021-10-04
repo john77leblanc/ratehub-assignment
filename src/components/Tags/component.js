@@ -13,10 +13,6 @@ const Tags = ({ taskId, tags }) => {
     tagInput.current.value = '';
   };
 
-  const handleRemoveTag = (e) => {
-    store.removeTag(taskId, e.target.id);
-  };
-
   return (
     <StyledComponent>
       <input
@@ -34,7 +30,7 @@ const Tags = ({ taskId, tags }) => {
               <button
                 id={tag.id}
                 name={tag.name}
-                onClick={handleRemoveTag}
+                onClick={() => store.removeTag(taskId, tag.id)}
                 aria-label="Remove tag"
               >
                 X

@@ -47,6 +47,13 @@ const TodoList = ({ className }) => {
             {store.completedItems.map(item => (
               <li key={item.id}>
                 {item.name}
+                {!!item.tags.length && (
+                  <div className="completeTags">
+                    {item.tags.map(tag => (
+                      <span><i>{tag.name}</i></span>
+                    ))}
+                  </div>
+                )}
               </li>
             ))}
           </ul>
