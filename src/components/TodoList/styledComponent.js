@@ -2,11 +2,11 @@ import styled from 'styled-components';
 
 
 export const StyledComponent = styled.div`
-  background-color: ${props => props.theme.background.main};
+  background-color: ${(props) => props.theme.background.main};
   padding: 1rem;
 
   h1 {
-    color: ${props => props.theme.color.accent};
+    color: ${(props) => props.theme.color.accent};
     margin-top: 0;
     font-size: 1.5rem;
   }
@@ -42,13 +42,13 @@ export const StyledComponent = styled.div`
   }
 
   button.addTask {
-    background-color: ${props => props.theme.color.accent};
+    background-color: ${(props) => props.theme.color.accent};
     border-radius: 5px;
-    color: ${props => props.theme.color.light};
+    color: ${(props) => props.theme.color.light};
     padding: 0.5rem 1rem;
 
     :hover {
-      background-color: ${props => props.theme.color.main};
+      background-color: ${(props) => props.theme.color.main};
     }
   }
 
@@ -58,9 +58,9 @@ export const StyledComponent = styled.div`
     gap: 0.25rem;
 
     span {
-      background-color: ${props => props.theme.grays.medium};
+      background-color: ${(props) => props.theme.grays.medium};
       border-radius: 3px;
-      color: ${props => props.theme.color.light};
+      color: ${(props) => props.theme.color.light};
       padding: 0 0.25rem;
     }
   }

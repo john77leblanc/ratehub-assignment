@@ -63,7 +63,7 @@ const GlobalStyle = createGlobalStyle`
 
   .card {
     border-radius: 1rem;
-    box-shadow: 0 2px 4px ${props => props.theme.color.main};
+    box-shadow: 0 2px 4px ${(props) => props.theme.color.main};
     padding: 1rem;
     margin-bottom: 1rem;
   }

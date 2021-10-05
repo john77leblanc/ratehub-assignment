@@ -1,18 +1,15 @@
-import React from 'react'
-import GlobalStyle from '../theme/globalStyle';
+import React from 'react';
 import { ThemeProvider } from 'styled-components';
+import GlobalStyle from '../theme/globalStyle';
 import { theme } from '../theme/theme';
 
-import TodoList from './TodoList/index.js'
+import TodoList from './TodoList/index.js';
 
 
 const CONFIG = {
   title: 'Demo',
   component: TodoList,
-  // argTypes: {
-  //     // backgroundColor: { control: 'color' },
-  // },
-}
+};
 
 export default CONFIG;
 export function Todo(args) {
@@ -23,5 +20,5 @@ export function Todo(args) {
         {...args}
       />
     </ThemeProvider>
-  )
+  );
 }

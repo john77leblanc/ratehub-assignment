@@ -7,10 +7,10 @@ export const StyledComponent = styled.li`
   position: relative;
   bottom: 0;
 
-  background-color: ${props => props.theme.background.main};
+  background-color: ${(props) => props.theme.background.main};
   border-width: 1px;
   border-style: solid;
-  border-color: ${props => props.theme.grays.medium};
+  border-color: ${(props) => props.theme.grays.medium};
   padding: 0.25rem 0.5rem;
 
   .w25 {
@@ -21,7 +21,7 @@ export const StyledComponent = styled.li`
   }
 
   .tags {
-    color: ${props => props.theme.grays.dark};
+    color: ${(props) => props.theme.grays.dark};
 
     ul.items {
       list-style: none;
@@ -29,9 +29,9 @@ export const StyledComponent = styled.li`
 
       li {
         display: block;
-        background-color: ${props => props.theme.color.accent};
+        background-color: ${(props) => props.theme.color.accent};
         border-radius: 3px;
-        color: ${props => props.theme.color.light};
+        color: ${(props) => props.theme.color.light};
         padding: 0 0.25rem;
       }
     }
@@ -58,13 +58,13 @@ export const StyledComponent = styled.li`
   :hover {
     bottom: 0.1rem;
     border-radius: 5px;
-    background-color: ${props => props.theme.background.main} !important;
-    box-shadow: 0 4px 8px ${props => props.theme.shadow.light};
+    background-color: ${(props) => props.theme.background.main} !important;
+    box-shadow: 0 4px 8px ${(props) => props.theme.shadow.light};
     z-index: 9999;
   }
 
   input {
-    border-right: 1px solid ${props => props.theme.grays.medium};
+    border-right: 1px solid ${(props) => props.theme.grays.medium};
     width: 50%;
   }
 `;

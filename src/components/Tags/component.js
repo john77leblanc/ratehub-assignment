@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { PropTypes } from 'prop-types';
 import { observer } from 'mobx-react';
 import { StyledComponent } from './styledComponent';
 import { useStore } from '../TodoList/store';
@@ -21,13 +22,14 @@ const Tags = ({ taskId, tags }) => {
         className="tagEntry"
         placeholder="Type here"
       />
-      <button onClick={handleAddTag}>Add Tag</button>
+      <button type="button" onClick={handleAddTag}>Add Tag</button>
       {!!tags.length && (
         <ul>
-          {tags.map(tag => (
+          {tags.map((tag) => (
             <li key={tag.id}>
               <i>{tag.name}</i>
               <button
+                type="button"
                 id={tag.id}
                 name={tag.name}
                 onClick={() => store.removeTag(taskId, tag.id)}
@@ -40,7 +42,12 @@ const Tags = ({ taskId, tags }) => {
         </ul>
       )}
     </StyledComponent>
-  )
+  );
+};
+
+Tags.propTypes = {
+  taskId: PropTypes.string.isRequired,
+  tags: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default observer(Tags);

@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
-import { observer } from 'mobx-react'
+import React, { useState } from 'react';
+import { PropTypes } from 'prop-types';
+import { observer } from 'mobx-react';
 
 import { StyledComponent } from './styledComponent';
 
@@ -9,7 +10,6 @@ import { useStore } from '../TodoList/store';
 
 const TodoListItem = ({
   taskId,
-  className,
   name,
   tags,
   inProgress,
@@ -17,26 +17,37 @@ const TodoListItem = ({
   const [taskName, setTaskName] = useState(name);
   const store = useStore();
 
-  const updateStore = (name) => {
-    store.setItemName(taskId, name);
+  const updateStore = (value) => {
+    store.setItemName(taskId, value);
   };
 
   return (
-    <StyledComponent className={className}>
+    <StyledComponent>
       <input
-        onChange={(e) => setTaskName(e.target.value)} value={taskName}
+        onChange={(e) => setTaskName(e.target.value)}
+        value={taskName}
         onBlur={(e) => updateStore(e.target.value)}
       />
       <div className="tags w25">
         <Tags taskId={taskId} tags={tags} />
       </div>
       <div className="controls w25">
-        <button onClick={() => store.toggleInProgress(taskId)}>In Progress {inProgress && (<span>True</span>)}</button>
-        <button onClick={() => store.setCompleted(taskId)} disabled={!inProgress}>Complete Task</button>
-        <button onClick={() => store.setDelete(taskId)}>Delete Task</button>
+        <button type="button" onClick={() => store.toggleInProgress(taskId)}>
+          In Progress
+          {inProgress && (<span>True</span>)}
+        </button>
+        <button type="button" onClick={() => store.setCompleted(taskId)} disabled={!inProgress}>Complete Task</button>
+        <button type="button" onClick={() => store.setDelete(taskId)}>Delete Task</button>
       </div>
     </StyledComponent>
-  )
-}
+  );
+};
+
+TodoListItem.propTypes = {
+  taskId: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  tags: PropTypes.arrayOf(PropTypes.object).isRequired,
+  inProgress: PropTypes.bool.isRequired,
+};
 
 export default observer(TodoListItem);

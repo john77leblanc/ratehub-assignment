@@ -9,12 +9,12 @@ import { StyledComponent } from './styledComponent';
 import ActionLog from '../ActionLog/component';
 
 
-const TodoList = ({ className }) => {
+const TodoList = () => {
   const store = useStore();
-  
+
   return (
     <StoreProvider>
-      <StyledComponent className={className}>
+      <StyledComponent>
         <header>
           <h1 className="title">TODO List Example</h1>
         </header>
@@ -22,7 +22,7 @@ const TodoList = ({ className }) => {
           <section className="tasks card">
             <h2>Tasks</h2>
             <ul className="incompleteTasks">
-              {store.activeItems.map(item => (
+              {store.activeItems.map((item) => (
                 <TodoListItem
                   key={item.id}
                   taskId={item.id}
@@ -34,12 +34,7 @@ const TodoList = ({ className }) => {
                 />
               ))}
             </ul>
-            <button
-              className="addTask"
-              onClick={store.addItem}
-            >
-              Add New Item
-            </button>
+            <button type="button" className="addTask" onClick={store.addItem}>Add New Item</button>
           </section>
           <aside className="actionLog card">
             <h2>Action Log</h2>
@@ -47,15 +42,18 @@ const TodoList = ({ className }) => {
           </aside>
         </main>
         <footer className="card">
-          <p>Filter by: <Filter options={store.allTaskTags} /></p>
+          <p>
+            Filter by:
+            <Filter options={store.allTaskTags} />
+          </p>
           <h2 className="completedTitle">Completed Items</h2>
           <ul className="completeTasks">
-            {store.completedItems.map(item => (
+            {store.completedItems.map((item) => (
               <li key={item.id}>
                 {item.name}
                 {!!item.tags.length && (
                   <div className="completeTags">
-                    {item.tags.map(tag => (
+                    {item.tags.map((tag) => (
                       <span><i>{tag.name}</i></span>
                     ))}
                   </div>
@@ -66,7 +64,7 @@ const TodoList = ({ className }) => {
         </footer>
       </StyledComponent>
     </StoreProvider>
-  )
-}
+  );
+};
 
 export default observer(TodoList);

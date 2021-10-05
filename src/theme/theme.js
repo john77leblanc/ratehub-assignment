@@ -21,5 +21,5 @@ export const theme = {
   font: {
     primary: '"Open Sans", Arial, Helvetica, sans-serif',
     secondary: '"Georgia", serif',
-  }
+  },
 };
