@@ -24,20 +24,34 @@ const TodoListItem = ({
   return (
     <StyledComponent>
       <input
+        className="name"
         onChange={(e) => setTaskName(e.target.value)}
         value={taskName}
         onBlur={(e) => updateStore(e.target.value)}
       />
-      <div className="tags w25">
-        <Tags taskId={taskId} tags={tags} />
+      <div className="inProgress">
+        {inProgress && (<span className="inProgress">In Progress</span>)}
       </div>
-      <div className="controls w25">
-        <button type="button" onClick={() => store.toggleInProgress(taskId)}>
-          In Progress
-          {inProgress && (<span>True</span>)}
+      <Tags className="tags" taskId={taskId} tags={tags} />
+      <div className="controls">
+        <button className="toggle" type="button" onClick={() => store.toggleInProgress(taskId)}>
+          {inProgress ? 'Pause' : 'Start'}
         </button>
-        <button type="button" onClick={() => store.setCompleted(taskId)} disabled={!inProgress}>Complete Task</button>
-        <button type="button" onClick={() => store.setDelete(taskId)}>Delete Task</button>
+        <button
+          className="complete"
+          type="button"
+          onClick={() => store.setCompleted(taskId)}
+          disabled={!inProgress}
+        >
+          Complete
+        </button>
+        <button
+          className="delete"
+          type="button"
+          onClick={() => store.setDelete(taskId)}
+        >
+          Delete
+        </button>
       </div>
     </StyledComponent>
   );

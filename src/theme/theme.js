@@ -4,11 +4,11 @@ export const theme = {
     accent: '#54CCDE',
     light: '#ffffff',
     dark: '#000000',
+    warning: '#ff0000',
   },
   background: {
     main: '#ffffff',
     accent: '#DDF5F8',
-    warning: '#ff0000',
   },
   grays: {
     light: '#eeeeee',

@@ -1,22 +1,32 @@
 import Styled from 'styled-components';
 
 
-export const StyledComponent = Styled.span`
+export const StyledComponent = Styled.div`
   .tagEntry {
-    background-color: ${(props) => props.theme.grays.light};
-    border: 1px solid ${(props) => props.theme.grays.light};
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
 
-    :focus {
-      background-color: ${(props) => props.theme.background.main};
+    input {
+      background-color: ${(props) => props.theme.grays.light};
+      border: 1px solid ${(props) => props.theme.grays.light};
+      padding: 0.25rem 0.5rem;
+      width: 70%;
+
+      :focus {
+        background-color: ${(props) => props.theme.background.main};
+      }
     }
-  }
 
-  button {
-    border: 1px solid ${(props) => props.theme.grays.light};
+    button {
+      display: block;
+      border: 1px solid ${(props) => props.theme.grays.light};
+      width: 30%;
 
-    :hover {
-      background-color: ${(props) => props.theme.color.accent};
-      color: ${(props) => props.theme.color.light};
+      :hover {
+        background-color: ${(props) => props.theme.color.accent};
+        color: ${(props) => props.theme.color.light};
+      }
     }
   }
 

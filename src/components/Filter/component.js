@@ -2,6 +2,8 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 import { useStore } from '../TodoList/store';
 
+import { StyledComponent } from './styledComponent';
+
 
 const Filter = ({ options }) => {
   const store = useStore();
@@ -12,12 +14,14 @@ const Filter = ({ options }) => {
   };
 
   return (
-    <select onChange={(e) => handleFilter(e.target.value)}>
-      <option value="all">All</option>
-      {!!options.length && options.map((option) => (
-        <option key={option} value={option}>{option}</option>
-      ))}
-    </select>
+    <StyledComponent>
+      <select onChange={(e) => handleFilter(e.target.value)}>
+        <option value="all">All</option>
+        {!!options.length && options.map((option) => (
+          <option key={option} value={option}>{option}</option>
+        ))}
+      </select>
+    </StyledComponent>
   );
 };
 

@@ -17,7 +17,9 @@ const GlobalStyle = createGlobalStyle`
     transition: background-color 0.25s, bottom 0.25s;
   }
 
-  button { cursor: pointer; }
+  button:not([disabled]) {
+    cursor: pointer;
+  }
 
   input, button {
     border: none;
@@ -27,6 +29,16 @@ const GlobalStyle = createGlobalStyle`
       border: none;
       outline: none;
     }
+  }
+
+  h1 {
+    color: ${(props) => props.theme.color.accent};
+    margin-top: 0;
+    font-size: 1.5rem;
+  }
+
+  h2 {
+    margin-top: 0;
   }
 
   @keyframes fadein {
@@ -65,7 +77,6 @@ const GlobalStyle = createGlobalStyle`
     border-radius: 1rem;
     box-shadow: 0 2px 4px ${(props) => props.theme.color.main};
     padding: 1rem;
-    margin-bottom: 1rem;
   }
 `;
 

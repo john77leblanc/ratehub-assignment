@@ -2,37 +2,39 @@ import styled from 'styled-components';
 
 
 export const StyledComponent = styled.div`
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "header header  header  header"
+    "main   main    main    actions"
+    "footer footer  footer  actions"
+  ;
   background-color: ${(props) => props.theme.background.main};
   padding: 1rem;
 
-  h1 {
-    color: ${(props) => props.theme.color.accent};
-    margin-top: 0;
-    font-size: 1.5rem;
-  }
+  header {
+    grid-area: header;
 
-  h2 {
-    margin-top: 0;
+    span:first-child {
+      font-size: 0.9rem;
+    }
   }
 
   main {
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: auto;
-    grid-template-areas:
-      "tasks tasks tasks actions"
-    ;
-  }
-
-  .tasks {
-    grid-area: tasks;
+    grid-area: main;
   }
 
   .actionLog {
     grid-area: actions;
     background-color: ${(props) => props.theme.grays.dark};
     color: ${(props) => props.theme.color.light};
+  }
+
+  footer {
+    grid-area: footer;
+    height: 100%;
   }
 
   ul.incompleteTasks {
@@ -52,6 +54,21 @@ export const StyledComponent = styled.div`
     }
   }
 
+  .completeTasks {
+    list-style: none;
+    padding-inline-start: 0;
+
+    li {
+      background-color: ${(props) => props.theme.grays.light};
+      border-radius: 0.25rem;
+      padding: 0.25rem 0.5rem;
+
+      :not(:last-child) {
+        margin-bottom: 0.25rem;
+      }
+    }
+  }
+
   .completeTags {
     display: flex;
     justify-content: flex-start;
@@ -63,5 +80,15 @@ export const StyledComponent = styled.div`
       color: ${(props) => props.theme.color.light};
       padding: 0 0.25rem;
     }
+  }
+
+  @media screen and (max-width: 800px) {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "header"
+      "main"
+      "footer"
+      "actions"
+    ;
   }
 `;

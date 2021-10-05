@@ -5,7 +5,7 @@ import { StyledComponent } from './styledComponent';
 import { useStore } from '../TodoList/store';
 
 
-const Tags = ({ taskId, tags }) => {
+const Tags = ({ className, taskId, tags }) => {
   const store = useStore();
   const tagInput = useRef();
 
@@ -15,14 +15,15 @@ const Tags = ({ taskId, tags }) => {
   };
 
   return (
-    <StyledComponent>
-      <input
-        type="text"
-        ref={tagInput}
-        className="tagEntry"
-        placeholder="Type here"
-      />
-      <button type="button" onClick={handleAddTag}>Add Tag</button>
+    <StyledComponent className={className}>
+      <div className="tagEntry">
+        <input
+          type="text"
+          ref={tagInput}
+          placeholder="Type here"
+        />
+        <button type="button" onClick={handleAddTag}>Add Tag</button>
+      </div>
       {!!tags.length && (
         <ul>
           {tags.map((tag) => (
@@ -46,8 +47,13 @@ const Tags = ({ taskId, tags }) => {
 };
 
 Tags.propTypes = {
+  className: PropTypes.string,
   taskId: PropTypes.string.isRequired,
   tags: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
+
+Tags.defaultProps = {
+  className: '',
 };
 
 export default observer(Tags);

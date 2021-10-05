@@ -17,9 +17,13 @@ const TodoList = () => {
       <StyledComponent>
         <header>
           <h1 className="title">TODO List Example</h1>
+          <div>
+            <span>Filter tasks by tag:</span>
+            <Filter options={store.allTaskTags} />
+          </div>
         </header>
-        <main>
-          <section className="tasks card">
+        <main className="card">
+          <section>
             <h2>Tasks</h2>
             <ul className="incompleteTasks">
               {store.activeItems.map((item) => (
@@ -36,16 +40,12 @@ const TodoList = () => {
             </ul>
             <button type="button" className="addTask" onClick={store.addItem}>Add New Item</button>
           </section>
-          <aside className="actionLog card">
-            <h2>Action Log</h2>
-            <ActionLog actions={store.actionLog} />
-          </aside>
         </main>
+        <aside className="actionLog card">
+          <h2>Action Log</h2>
+          <ActionLog actions={store.actionLog} />
+        </aside>
         <footer className="card">
-          <p>
-            Filter by:
-            <Filter options={store.allTaskTags} />
-          </p>
           <h2 className="completedTitle">Completed Items</h2>
           <ul className="completeTasks">
             {store.completedItems.map((item) => (

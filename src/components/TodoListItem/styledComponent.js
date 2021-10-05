@@ -2,8 +2,12 @@ import styled from 'styled-components';
 
 
 export const StyledComponent = styled.li`
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-areas:
+    "name progress tags controls"
+  ;
   position: relative;
   bottom: 0;
 
@@ -13,32 +17,79 @@ export const StyledComponent = styled.li`
   border-color: ${(props) => props.theme.grays.medium};
   padding: 0.25rem 0.5rem;
 
-  .w25 {
-    display: flex;
-    justify-content: flex-start;
-    width: 25%;
-    padding: 0 0.5rem;
+  .name {
+    grid-area: name;
+  }
+
+  .inProgress {
+    grid-area: progress;
+    align-self: center;
+    justify-self: right;
+    color: ${(props) => props.theme.color.accent};
+    font-size: 0.9rem;
+    font-weight: 600;
   }
 
   .tags {
-    color: ${(props) => props.theme.grays.dark};
+    grid-area: tags;
+    padding: 0 1rem;
+    border-color: ${(props) => props.theme.grays.medium};
+    border-style: solid;
+    border-width: 0;
+    border-left-width: 1px;
+    border-right-width: 1px;
+  }
 
-    ul.items {
-      list-style: none;
-      padding-inline-start: 0;
+  .controls {
+    grid-area: controls;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.25rem;
+    justify-content: space-between;
 
-      li {
-        display: block;
-        background-color: ${(props) => props.theme.color.accent};
-        border-radius: 3px;
-        color: ${(props) => props.theme.color.light};
-        padding: 0 0.25rem;
+    button {
+      background-color: ${(props) => props.theme.color.accent};
+      border-radius: 0.25rem;
+      color: ${(props) => props.theme.color.light};
+      font-size: 0.7rem;
+      font-weight: 800;
+      padding: 0.25rem;
+      text-transform: uppercase;
+      width: 100%;
+
+      &[disabled] {
+        background-color: ${(props) => props.theme.grays.light};
+      }
+
+      :hover:not([disabled]) {
+        background-color: ${(props) => props.theme.color.main};
+
+        &.delete {
+          background-color: ${(props) => props.theme.color.warning};
+        }
       }
     }
   }
 
-  .controls {
-    width: 25%;
+  @media screen and (max-width: 960px) {
+    grid-template-areas:
+      "name name controls controls"
+      "progress tags tags tags"
+    ;
+
+    .inProgress {
+      justify-self: left;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "name"
+      "progress"
+      "controls"
+      "tags"
+    ;
   }
 
   :not(:last-child) {
@@ -61,10 +112,5 @@ export const StyledComponent = styled.li`
     background-color: ${(props) => props.theme.background.main} !important;
     box-shadow: 0 4px 8px ${(props) => props.theme.shadow.light};
     z-index: 9999;
-  }
-
-  input {
-    border-right: 1px solid ${(props) => props.theme.grays.medium};
-    width: 50%;
   }
 `;

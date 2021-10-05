@@ -7,14 +7,14 @@ const ActionLog = ({ actions }) => (
   <StyledComponent>
     <ul>
       {!!actions.length && actions.map((action) => (
-        <li key={action}>{action}</li>
+        <li key={action.id}>{action.name}</li>
       ))}
     </ul>
   </StyledComponent>
 );
 
 ActionLog.propTypes = {
-  actions: PropTypes.arrayOf(PropTypes.string).isRequired,
+  actions: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default ActionLog;

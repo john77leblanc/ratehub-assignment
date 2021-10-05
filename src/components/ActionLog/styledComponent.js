@@ -4,6 +4,8 @@ import styled from 'styled-components';
 export const StyledComponent = styled.div`
   ul {
     list-style: none;
+    margin: 0;
+    max-height: 100%;
     padding-inline-start: 0;
   }
 

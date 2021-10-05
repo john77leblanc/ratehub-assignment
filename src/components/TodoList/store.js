@@ -14,6 +14,7 @@ const createTodoStore = () => {
     items: [{
       id: uuid(),
       name: 'Sample item',
+      inProgress: false,
       isComplete: false,
       tags: [],
     }],
@@ -33,6 +34,11 @@ const createTodoStore = () => {
       return self.allTags;
     },
     get actionLog() {
+      const maxReturn = 10;
+      const logsLength = self.logs.length;
+      if (logsLength > maxReturn) {
+        return self.logs.slice(logsLength - maxReturn);
+      }
       return self.logs;
     },
 
@@ -45,6 +51,7 @@ const createTodoStore = () => {
         name: `Item ${self.items.length}`,
         tags: [],
         inProgress: false,
+        isComplete: false,
       };
       self.items.push(item);
       self.addLog(`Task "${item.name}" added.`);
@@ -79,7 +86,7 @@ const createTodoStore = () => {
     toggleInProgress(id) {
       const task = self.findItem(id);
       task.inProgress = !task.inProgress;
-      self.addLog(`Task "${task.name}" toggled to ${task.inProgress ? 'in' : 'out of'} progress.`);
+      self.addLog(`Task "${task.name}" ${task.inProgress ? 'started' : 'paused'}.`);
     },
     setCompleted(id) {
       const task = self.findItem(id);
@@ -93,10 +100,10 @@ const createTodoStore = () => {
     },
     setFilter(name) {
       self.filter = name;
-      self.addLog(`Filter changed to ${name === null ? 'All' : name}`);
+      self.addLog(`Filter changed to ${name === null ? 'All' : name}.`);
     },
     addLog(log) {
-      self.logs.push(log);
+      self.logs.push({ id: uuid(), name: log });
     },
   });
 
