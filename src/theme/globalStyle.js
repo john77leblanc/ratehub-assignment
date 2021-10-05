@@ -60,6 +60,13 @@ const GlobalStyle = createGlobalStyle`
     bottom: 0;
     animation: floatin 1s;
   }
+
+  .card {
+    border-radius: 1rem;
+    box-shadow: 0 2px 4px ${props => props.theme.color.main};
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
 `;
 
 export default GlobalStyle;

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 
 export const StyledComponent = styled.div`
@@ -15,11 +15,24 @@ export const StyledComponent = styled.div`
     margin-top: 0;
   }
 
-  section {
-    border-radius: 1rem;
-    box-shadow: 0 2px 4px ${props => props.theme.color.main};
-    padding: 1rem;
-    margin-bottom: 1rem;
+  main {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(1fr, 4);
+    grid-template-rows: auto;
+    grid-template-areas:
+      "tasks tasks tasks actions"
+    ;
+  }
+
+  .tasks {
+    grid-area: tasks;
+  }
+
+  .actionLog {
+    grid-area: actions;
+    background-color: ${(props) => props.theme.grays.dark};
+    color: ${(props) => props.theme.color.light};
   }
 
   ul.incompleteTasks {

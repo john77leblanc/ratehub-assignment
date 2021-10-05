@@ -12,7 +12,7 @@ export const theme = {
   },
   grays: {
     light: '#eeeeee',
-    medium: '#cccccc',
+    medium: '#999999',
     dark: '#333333',
   },
   shadow: {

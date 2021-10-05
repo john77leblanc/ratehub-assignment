@@ -1,4 +1,5 @@
-import { observable } from 'mobx';
+import { observable, observe, reaction } from 'mobx';
+import { observer } from 'mobx-react';
 import { createContext, useContext } from 'react';
 import { v4 as uuid } from 'uuid';
 
@@ -17,6 +18,7 @@ const createTodoStore = () => {
     }],
     allTags: [],
     filter: null,
+    log: [],
 
     get activeItems() {
       return self.items.filter(task => !task.isComplete)
@@ -28,6 +30,9 @@ const createTodoStore = () => {
     },
     get allTaskTags() {
       return self.allTags;
+    },
+    get actionLog() {
+      return self.log;
     },
 
     findItem(id) {
@@ -74,11 +79,21 @@ const createTodoStore = () => {
     },
     setFilter(name) {
       self.filter = name;
+    },
+    addLog(log) {
+      self.logs.push(log);
     }
-  })
+  });
 
   return self;
 }
+
+// observe(this.obj, change => {
+//   console.log(
+//     `${change.type} ${change.name} from ${change.oldValue}` +
+//       ` to ${change.object[change.name]}`
+//   );
+// });
 
 const StoreContext = createContext(createTodoStore());
 
