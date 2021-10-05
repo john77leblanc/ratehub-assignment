@@ -1,9 +1,8 @@
-import { observable, observe, reaction } from 'mobx';
-import { observer } from 'mobx-react';
+import { observable } from 'mobx';
 import { createContext, useContext } from 'react';
 import { v4 as uuid } from 'uuid';
 
-const filterFind = (task, filter) => {
+export const filterFind = (task, filter) => {
   if (filter === null) return true;
   return task.tags.find(tag => tag.name === filter);
 };
@@ -18,7 +17,7 @@ const createTodoStore = () => {
     }],
     allTags: [],
     filter: null,
-    log: [],
+    logs: [],
 
     get activeItems() {
       return self.items.filter(task => !task.isComplete)
@@ -32,22 +31,27 @@ const createTodoStore = () => {
       return self.allTags;
     },
     get actionLog() {
-      return self.log;
+      return self.logs;
     },
 
     findItem(id) {
       return self.items.find(i => i.id === id);
     },
     addItem() {
-      self.items.push({
+      let item = {
         id: uuid(),
         name: `Item ${self.items.length}`,
         tags: [],
         inProgress: false,
-      });
+      }
+      self.items.push(item);
+      self.addLog(`Task "${item.name}" added.`);
     },
     setItemName(id, name) {
-      self.findItem(id).name = name;
+      let task = self.findItem(id);
+      let oldName = task.name;
+      task.name = name;
+      self.addLog(`Task "${oldName}" updated to "${name}".`);
     },
     sortTags(task) {
       task.tags.sort((a,b) => a.name.localeCompare(b.name));
@@ -62,23 +66,33 @@ const createTodoStore = () => {
         self.allTags = [...new Set(self.allTags.concat(task.tags.map(tag => tag.name)))].sort();
       }
       self.sortTags(task);
+      self.addLog(`Tag "${name}" added to Task "${task.name}".`);
     },
     removeTag(taskId, id) {
       let task = self.findItem(taskId);
+      let tag = task.tags.find((tag) => tag.id === id);
       task.tags = task.tags.filter((tag) => tag.id !== id);
       self.sortTags(task);
+      self.addLog(`Tag "${tag.name}" removed from Task "${task.name}".`);
     },
     toggleInProgress(id) {
-      self.findItem(id).inProgress = !self.findItem(id).inProgress;
+      let task = self.findItem(id);
+      task.inProgress = !task.inProgress;
+      self.addLog(`Task "${task.name}" toggled to ${task.inProgress ? 'in' : 'out of'} progress.`);
     },
     setCompleted(id) {
-      self.findItem(id).isComplete = true;
+      let task = self.findItem(id);
+      task.isComplete = true;
+      self.addLog(`Task "${task.name}" completed.`);
     },
     setDelete(id) {
-      self.items.remove(self.findItem(id));
+      let task = self.findItem(id);
+      self.items.remove(task);
+      self.addLog(`Task "${task.name}" deleted.`);
     },
     setFilter(name) {
       self.filter = name;
+      self.addLog(`Filter changed to ${name === null ? 'All' : name}`);
     },
     addLog(log) {
       self.logs.push(log);
@@ -88,16 +102,10 @@ const createTodoStore = () => {
   return self;
 }
 
-// observe(this.obj, change => {
-//   console.log(
-//     `${change.type} ${change.name} from ${change.oldValue}` +
-//       ` to ${change.object[change.name]}`
-//   );
-// });
+const store = createTodoStore();
+const StoreContext = createContext(store);
 
-const StoreContext = createContext(createTodoStore());
-
-const StoreProvider = ({ store, children }) => {
+const StoreProvider = ({ children }) => {
   return (
     <StoreContext.Provider value={store}>{children}</StoreContext.Provider>
   );

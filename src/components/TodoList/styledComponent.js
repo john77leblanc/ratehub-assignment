@@ -18,7 +18,7 @@ export const StyledComponent = styled.div`
   main {
     display: grid;
     gap: 1rem;
-    grid-template-columns: repeat(1fr, 4);
+    grid-template-columns: repeat(4, 1fr);
     grid-template-rows: auto;
     grid-template-areas:
       "tasks tasks tasks actions"

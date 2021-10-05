@@ -19,7 +19,8 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "start": "start-storybook -p 6006 -s public"
+    "start": "start-storybook -p 6006 -s public",
+    "test": "react-scripts test"
   },
   "eslintConfig": {
     "extends": [

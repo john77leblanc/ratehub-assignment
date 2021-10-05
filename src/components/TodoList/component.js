@@ -1,18 +1,19 @@
 import React from 'react';
 import { observer } from 'mobx-react';
 
-import { createTodoStore, StoreProvider } from './store';
+import { StoreProvider, useStore } from './store';
 import TodoListItem from '../TodoListItem/index';
 import Filter from '../Filter/index';
 
 import { StyledComponent } from './styledComponent';
 import ActionLog from '../ActionLog/component';
 
-const store = createTodoStore();
 
 const TodoList = ({ className }) => {
+  const store = useStore();
+  
   return (
-    <StoreProvider store={store}>
+    <StoreProvider>
       <StyledComponent className={className}>
         <header>
           <h1 className="title">TODO List Example</h1>

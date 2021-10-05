@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { observer } from 'mobx-react'
 
 import { StyledComponent } from './styledComponent';
@@ -14,11 +14,19 @@ const TodoListItem = ({
   tags,
   inProgress,
 }) => {
+  const [taskName, setTaskName] = useState(name);
   const store = useStore();
+
+  const updateStore = (name) => {
+    store.setItemName(taskId, name);
+  };
 
   return (
     <StyledComponent className={className}>
-      <input onChange={(e) => store.setItemName(taskId, e.target.value)} value={name} />
+      <input
+        onChange={(e) => setTaskName(e.target.value)} value={taskName}
+        onBlur={(e) => updateStore(e.target.value)}
+      />
       <div className="tags w25">
         <Tags taskId={taskId} tags={tags} />
       </div>

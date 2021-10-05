@@ -5,7 +5,7 @@ const ActionLog = ({ actions }) => {
   return (
     <StyledComponent>
       <ul>
-        {actions.map(action => (
+        {!!actions.length && actions.map(action => (
           <li key={action}>{action}</li>
         ))}
       </ul>
